@@ -1,11 +1,17 @@
 const wrapper = document.querySelector('.wrapper'),
   searchInput = wrapper.querySelector('input')
 synonyms = wrapper.querySelector('.details .list')
+// search = wrapper.querySelector('.text')
 
 infoText = wrapper.querySelector('.info-text')
 volume = wrapper.querySelector('.word i')
 removeIcon = wrapper.querySelector('.search span')
 let audio
+titulo = wrapper.querySelector('header')
+italian = document.getElementById('italy')
+english = document.getElementById('eua')
+// english = wrapper.querySelector('.eua')
+let language = 'en'
 //funcao para pesquisar os sinonimos
 function search(word) {
   searchInput.value = word
@@ -54,7 +60,7 @@ function fetchApi(word) {
   wrapper.classList.remove('active')
   infoText.style.color = '#000'
   infoText.innerHTML = `Searching the meaning of <span>${word}</span>`
-  let url = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+  let url = `https://api.dictionaryapi.dev/api/v2/entries/${language}/${word}`
   fetch(url)
     .then(res => res.json())
     .then(result => data(result, word))
@@ -70,11 +76,42 @@ volume.addEventListener('click', () => {
   audio.play()
 })
 
-removeIcon.addEventListener('click', () => {
+//trocar idioma
+italian.addEventListener('click', () => {
+  if (language == 'en') {
+    zerar()
+    language = 'it'
+    titulo.innerHTML = `Dizionario Italiano`
+    infoText.innerHTML = `Digita una parola e premi ENTER per ottenere significato, esempio, pronuncia e sinonimi di quella parola digitata.`
+    document.getElementsByName('trocar')[0].placeholder = 'Cerca una parola'
+    document.querySelector('.meaning p').innerHTML = 'Significato'
+    document.querySelector('.example p').innerHTML = 'Esempio'
+    document.getElementById('som').classList.remove('fa-volume-up')
+  } else {
+    return
+  }
+})
+
+english.addEventListener('click', () => {
+  if ((language = 'it')) {
+    zerar()
+    language = 'en'
+    titulo.innerHTML = `English Dictionary`
+    infoText.innerHTML = `Type a word and press enter to get meaning, example, pronunciation, and synonyms of that typed word.`
+    document.getElementsByName('trocar')[0].placeholder = 'Search a Word'
+    document.querySelector('.meaning p').innerHTML = 'Meaning'
+    document.querySelector('.example p').innerHTML = 'Example'
+    document.getElementById('som').classList.add('fa-volume-up')
+  }
+})
+
+removeIcon.addEventListener('click', zerar)
+
+function zerar() {
   searchInput.value = ''
   searchInput.focus()
   wrapper.classList.remove('active')
   infoText.style.color = '#000'
   infoText.innerHTML =
     'Type any existing word and press enter to get meaning, example, synonyms, etc.'
-})
+}

@@ -10,8 +10,24 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: chocolate;
+  background: linear-gradient(to bottom right, #545358, #1e1b32);
 }
+.icones {
+  display: inline-flex;
+  box-sizing: content-box;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
+.icones .eua,
+.icones .italy {
+  width: 3rem;
+  height: fit-content;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
 .wrapper {
   width: 420px;
   border-radius: 7px;
@@ -113,6 +129,7 @@ ul .word span {
   font-size: 12px;
   color: #989898;
 }
+
 ul .word i {
   cursor: pointer;
   font-size: 15px;
