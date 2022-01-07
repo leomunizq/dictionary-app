@@ -12,6 +12,7 @@ body {
   min-height: 100vh;
   background: linear-gradient(to bottom right, #545358, #1e1b32);
 }
+
 .icones {
   display: inline-flex;
   box-sizing: content-box;
@@ -23,7 +24,7 @@ body {
 .icones .eua,
 .icones .italy {
   width: 3rem;
-  height: fit-content;
+  height: auto;
   margin-right: 1rem;
   cursor: pointer;
 }
@@ -34,6 +35,7 @@ body {
   background: #fff;
   padding: 25px 28px 45px;
   box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.05);
+  max-width: 90%;
 }
 
 .wrapper header {
